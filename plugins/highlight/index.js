@@ -16,30 +16,20 @@ Highlight.prototype.onParse = function (node, vm) {
       node.attrs.class = (node.attrs.class || '') + ' hl-pre'
       return
     }
-    let i
-    for (i = node.children.length; i--;) {
-      if (node.children[i].name === 'code') break
+    const lang = node.attrs['data-language']
+    // 不是代码块
+    if(!lang) {
+      return
     }
-    if (i === -1) return
-    const code = node.children[i]
-    let className = code.attrs.class + ' ' + node.attrs.class
-    i = className.indexOf('language-')
-    if (i === -1) {
-      i = className.indexOf('lang-')
-      if (i === -1) {
-        className = 'language-text'
-        i = 9
-      } else {
-        i += 5
-      }
-    } else {
-      i += 9
-    }
-    let j
-    for (j = i; j < className.length; j++) {
-      if (className[j] === ' ') break
-    }
-    const lang = className.substring(i, j)
+    // 代码内容
+    const codeContent = node.children[0]
+    node.children = []
+    node.children.push({
+      name: 'code',
+      attrs: {},
+      children:[codeContent]
+    })
+    const code = node.children[0]
     if (code.children.length) {
       const text = this.vm.getText(code.children).replace(/&amp;/g, '&')
       if (!text) return

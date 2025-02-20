@@ -312,6 +312,8 @@ Parser.prototype.onAttrName = function (name) {
     } else if (this.tagName === 'img' || this.tagName === 'a') {
       // a 和 img 标签保留 data- 的属性，可以在 imgtap 和 linktap 事件中使用
       this.attrName = name
+    } else if (name=== 'data-language'){
+      this.attrName = 'data-language'
     } else {
       // 剩余的移除以减小大小
       this.attrName = undefined

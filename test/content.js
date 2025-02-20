@@ -200,4 +200,9 @@ module.exports = `<title>富文本示例</title>
     </svg>
     <div style="font-size: 12px; color: gray; margin-top: 5px;">svg 动画</div>
   </section>
+  <section style="text-align: center; margin: 0px auto;">
+  <blockquote>这是一个引用1</blockquote>
+  <blockquote>这是一个引用2</blockquote>
+  <pre data-language="plain">这是模拟代码</pre>
+</section>
 </div>`
